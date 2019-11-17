@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Movies1711.Controllers
 {
+
+    //[EnableCors("*", "*", "*")] // Origin[url of request domain],  Header,  Method[get, post, put, delete]
     public class MoviesController : ApiController
     {
         private static List<Movie> movies = new List<Movie>();

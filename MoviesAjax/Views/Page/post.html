@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AJAX INTRODUCTION</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<style>
+    body {
+        margin-left: 10px;
+    }
+</style>
+
+<body>
+
+    <hr>
+    <br>
+    <p>Name: <input type="text" id="name"></p>
+    <p>Year: <input type="number" id="year"></p>
+    <p>Rank: <input type="number" id="rank"></p>
+    <p>Genre: <input type="text" id="genre"></p>
+    <button onclick="postuser()">POST</button><br />
+    <button onclick="postuserJQ()">POST-JQ</button><br />
+    <br>
+    <div id="result">
+
+    </div>
+
+    <script>
+        var result
+        var oReq
+        function postuser() {
+
+            var Name = $('#name').val()
+            var Year = $('#year').val()
+            var Rank = $('#rank').val()
+            var Genre = $('#genre').val()
+            var item = {
+                Name,
+                Year,
+                Rank,
+                Genre
+            }
+
+            oReq = new XMLHttpRequest();
+            oReq.onload = function () {
+                alert('Succeeded!')
+            }
+            oReq.onerror = function () {
+                alert('error')
+            }
+            oReq.open("POST", "/api/movies");
+            oReq.setRequestHeader("Content-Type", "application/json")
+            oReq.send(JSON.stringify(item));
+
+        }
+
+        function postuserJQ() {
+            var url_web_api = "/api/movies"
+
+            var Name = $('#name').val()
+            var Year = $('#year').val()
+            var Rank = $('#rank').val()
+            var Genre = $('#genre').val()
+            var item = {
+                Name,
+                Year,
+                Rank,
+                Genre
+            }
+
+            // JSON.stringify(item)
+
+            var ajaxPostDataConfig = {
+                type: "POST", // what is the method? post, get, put , delete
+                url: url_web_api,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(item) // request http body
+            }
+
+            $.ajax(ajaxPostDataConfig).then(
+                // what to do after success?
+                function (data) {
+                    console.log(data)
+                }
+            ).fail(
+                // what to do on error
+                function (err) {
+                    console.error(err)
+                }
+            )
+        }
+    </script>
+
+</body>
+
+</html>

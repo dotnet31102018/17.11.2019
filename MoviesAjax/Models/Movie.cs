@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Movies1711.Models
 {
-    public class Movie 
+    public class Movie
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AJAX INTRODUCTION</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<style>
+  body {
+    margin-left: 10px;
+  }
+</style>
+
+<body>
+
+  <hr>
+  <br>
+  <p>ID: <input type="number" id="num"></p>
+  <button onclick="getuser()">GET</button>
+  <br>
+  <div id="result">
+
+  </div>
+
+  <script>
+    var result
+    var oReq
+    function getuser() {
+
+      function reqListener() {
+        console.log(this.responseText);
+        $('#result').html(this.responseText)
+      }
+
+      oReq = new XMLHttpRequest();
+      oReq.addEventListener("load", reqListener);
+      oReq.open("GET", `http://localhost:50108/api/movies/${$('#num').val()}`);
+      oReq.send();
+
+    }
+  </script>
+
+</body>
+
+</html>

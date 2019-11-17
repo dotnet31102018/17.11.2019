@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AJAX INTRODUCTION</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<style>
+    body {
+        margin-left: 10px;
+    }
+</style>
+
+<body>
+
+    <hr>
+    <br>
+    <p>ID: <input type="number" id="num"></p>
+    <button onclick="getuser()">GET</button>
+    <br />
+    <button onclick="getuserJQ()">GET-JQUERY</button>
+    <br>
+    <div id="result">
+
+    </div>
+    <table id="movies" border="1" style="padding:5px" cellpadding="7">
+
+    </table>
+    <script>
+        var result
+        var oReq
+        function getuser() {
+
+            function reqListener() {
+                console.log(this.responseText);
+                $('#result').html(this.responseText)
+            }
+
+            oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", `/api/movies/${$('#num').val()}`);
+            oReq.send();
+        }
+
+        var debug
+        function getuserJQ() {
+
+            $.ajax({
+                url: `/apasdasdi/movies/${$('#num').val()}`
+            }).then(function (data) {
+                console.log(data);
+                //$('#result').html(JSON.stringify(data))
+                var $movie_table = $("#movies")
+                $movie_table.append(`
+                    < tr >
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>YEAR</th>
+                    <th>RANK</th>
+                    <th>GENRE</th></tr >`);
+
+                $.each(data, function (i, movie) {
+                    $movie_table.append(`<tr> <td> ${movie.Id} </td><td>${movie.Name}</td><td>${movie.Year}</td><td>${movie.Rank}</td><td>${movie.Genre}</td></tr>`)
+                })
+            }).fail(
+                    // what to do on error
+                    function (err) {
+                        console.error(err)
+                    }
+                )
+        }
+
+    </script>
+
+</body>
+
+</html>
