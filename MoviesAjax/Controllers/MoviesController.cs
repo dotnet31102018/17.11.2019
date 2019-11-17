@@ -27,8 +27,7 @@ namespace Movies1711.Controllers
         {
             if (movies.Count == 0)
                 return StatusCode(HttpStatusCode.NoContent);
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, movies);
-            return Ok(msg);
+            return Ok(movies);
         }
 
         [HttpGet]
@@ -37,8 +36,7 @@ namespace Movies1711.Controllers
             Movie result = movies.FirstOrDefault(m => m.Id == id);
             if (result == null)
                 return StatusCode(HttpStatusCode.NoContent);
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, result);
-            return Ok(msg);
+            return Ok(result);
         }
 
 
