@@ -24,9 +24,7 @@
 	<div id="result">
 
 	</div>
-	<table id="movies" border="1" style="padding:5px" cellpadding="7">
-
-	</table>
+	<table id="movies" border="1" style="padding:5px" cellpadding="7"></table>
 	<script>
 		var result
 		var oReq
@@ -39,7 +37,7 @@
 
 			oReq = new XMLHttpRequest();
 			oReq.addEventListener("load", reqListener);
-			oReq.open("GET", `/api/movies/${$('#num').val()}`);
+			oReq.open("DELETE", `/api/movies/${$('#num').val()}`);
 			oReq.send();
 		}
 
@@ -47,22 +45,11 @@
 		function getuserJQ() {
 
 			$.ajax({
+				type: "DELETE",
 				url: `/api/movies/${$('#num').val()}`
-			}).then(function (data) {
-				console.log(data);
-				//$('#result').html(JSON.stringify(data))
-				var $movie_table = $("#movies")
-				$movie_table.append(`
-						< tr >
-						<th>ID</th>
-						<th>TITLE</th>
-						<th>YEAR</th>
-						<th>RANK</th>
-						<th>GENRE</th></tr >`);
-
-				$.each(data, function (i, movie) {
-					$movie_table.append(`<tr> <td> ${movie.Id} </td><td>${movie.Name}</td><td>${movie.Year}</td><td>${movie.Rank}</td><td>${movie.Genre}</td></tr>`)
-				})
+			}).then(function () {
+				console.log("deleted");
+				
 			}).fail(
 				// what to do on error
 				function (err) {
