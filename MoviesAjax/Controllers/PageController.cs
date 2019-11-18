@@ -14,16 +14,21 @@ namespace Movies1711.Controllers
             return View();
         }
 
-        // GET: Page
         public ActionResult GetMovie()
         {
             return new FilePathResult("~/Views/Page/get.html", "text/html");
         }
-
-        // GET: Page
         public ActionResult PostMovie()
         {
             return new FilePathResult("~/Views/Page/post.html", "text/html");
+        }
+        public ActionResult PutMovie()
+        {
+            return new FilePathResult("~/Views/Page/put.html", "text/html");
+        }
+        public ActionResult DeleteMovie()
+        {
+            return new FilePathResult("~/Views/Page/delete.html", "text/html");
         }
     }
 }
